@@ -115,8 +115,9 @@ def main2():
         # print("%6.2f" % (value), end="")
         # end="" prints nothing at the end the the print statement (no line return)
         # %6.2f == six spaces wide, 2 digits after the decimal
-main1()
-main2()    
+if __name__ == '__main__':
+    main1()
+    main2()    
     
 """              Random   | Mostly sorted |   Swaps   |     Notes
     BIG O's               |               |           |   Easy to code
