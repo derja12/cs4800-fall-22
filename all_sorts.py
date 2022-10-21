@@ -8,6 +8,9 @@ class Counter:
         self.mS = 0
         
 def Bubble(L,c):
+    if type(L) != list:
+        raise TypeError("{0} is expected to be a list, not {1}".format(L, type(L)))
+    
     indicator = True
     while indicator == True:
         indicator = False
@@ -20,6 +23,9 @@ def Bubble(L,c):
     return
 
 def Shaker(L,c):
+    if type(L) != list:
+        raise TypeError("{0} is expected to be a list, not {1}".format(L, type(L)))
+    
     counter = 0
     indicator = True
     while indicator:
@@ -41,6 +47,9 @@ def Shaker(L,c):
     return
     
 def Select(A,c):
+    if type(A) != list:
+        raise TypeError("{0} is expected to be a list, not {1}".format(A, type(A)))
+    
     for i in range(len(A)):
         smallest = A[i]
         smallestIndex = i
@@ -69,6 +78,9 @@ def createRandomList(size):
     return A
 
 def Merge(A,c):
+    if type(A) != list:
+        raise TypeError("{0} is expected to be a list, not {1}".format(A, type(A)))
+    
     if len(A) <= 1:
         return
     L = A[0:len(A)//2]
@@ -97,9 +109,15 @@ def Merge(A,c):
             c.mS += 1
         
 def mQuick(A,c):
+    if type(A) != list:
+        raise TypeError("{0} is expected to be a list, not {1}".format(A, type(A)))
+
     Quicksort(A,0,len(A)-1,c,True)
     
 def Quick(A,c):
+    if type(A) != list:
+        raise TypeError("{0} is expected to be a list, not {1}".format(A, type(A)))
+
     Quicksort(A,0,len(A)-1,c,False)
     
 def Quicksort(A,low,high,c,modified):
@@ -127,10 +145,9 @@ def Quicksort(A,low,high,c,modified):
     Quicksort(A,pivot+1,high,c,modified)
 
 def Count(A,c):
-    # F = []
-    # for i in range(len(A)):
-    #     F.append(0)
-    
+    if type(A) != list:
+        raise TypeError("{0} is expected to be a list, not {1}".format(A, type(A)))
+        
     F = [0] * len(A)
     
     for x in A:
