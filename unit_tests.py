@@ -17,12 +17,11 @@ class TestBubbleSort(unittest.TestCase):
         self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
         
     def test_2_empty_list(self):
-        randomList = []
         c = Counter()
-        Bubble(randomList, c)
+        Bubble([], c)
         self.assertEqual(c.mC, 0)
         self.assertEqual(c.mS, 0)
-        self.assertEqual(randomList, [])
+        self.assertEqual([], [])
 
     def test_3_non_list(self):
         self.assertRaises(TypeError, Bubble, "string", Counter())
@@ -39,6 +38,7 @@ class TestBubbleSort(unittest.TestCase):
         Bubble(randomList, c)
         self.assertEqual(randomList, pySort)
 
+    # could be a good edge case to break (swapping numbers that are equal)??
     def test_5_dup_list(self):
         randomList = [0] * 20
         c = Counter()
@@ -65,12 +65,11 @@ class TestShakerSort(unittest.TestCase):
         self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
         
     def test_2_empty_list(self):
-        randomList = []
         c = Counter()
-        Shaker(randomList, c)
+        Shaker([], c)
         self.assertEqual(c.mC, 0)
         self.assertEqual(c.mS, 0)
-        self.assertEqual(randomList, [])
+        self.assertEqual([], [])
 
     def test_3_non_list(self):
         self.assertRaises(TypeError, Shaker, "string", Counter())
@@ -87,7 +86,6 @@ class TestShakerSort(unittest.TestCase):
         Shaker(randomList, c)
         self.assertEqual(randomList, pySort)
 
-    # could be a good edge case to break??
     def test_5_dup_list(self):
         randomList = [0] * 20
         c = Counter()
@@ -112,6 +110,40 @@ class TestSelectSort(unittest.TestCase):
         self.assertEqual(c.mC, 55)
         self.assertEqual(c.mS, 10)
         self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
+    
+    def test_2_empty_list(self):
+        c = Counter()
+        Select([], c)
+        self.assertEqual(c.mC, 0)
+        self.assertEqual(c.mS, 0)
+        self.assertEqual([], [])
+
+    def test_3_non_list(self):
+        self.assertRaises(TypeError, Select, "string", Counter())
+        self.assertRaises(TypeError, Select, 64, Counter())
+        self.assertRaises(TypeError, Select, False, Counter())
+
+    def test_4_random_large_list(self):
+        randomList = []
+        for i in range(2 ** 10):
+            randomList.append(randint(0,1000))
+        
+        c = Counter()
+        pySort = sorted(randomList[::])
+        Select(randomList, c)
+        self.assertEqual(randomList, pySort)
+
+    def test_5_dup_list(self):
+        randomList = [0] * 20
+        c = Counter()
+        Select(randomList, c)
+        self.assertEqual(c.mS, len(randomList))
+        self.assertEqual(c.mC, 210)
+        self.assertEqual(randomList, [0] * 20)
+
+    def test_6_returns_none(self):
+        ret = Select([], Counter())
+        self.assertIsNone(ret)
 
 #=======================================================================================#
 #===================================== Merge Sort ======================================#
@@ -126,6 +158,40 @@ class TestMergeSort(unittest.TestCase):
         self.assertEqual(c.mS, 68)
         self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
 
+    def test_2_empty_list(self):
+        c = Counter()
+        Merge([], c)
+        self.assertEqual(c.mC, 0)
+        self.assertEqual(c.mS, 0)
+        self.assertEqual([], [])
+
+    def test_3_non_list(self):
+        self.assertRaises(TypeError, Merge, "string", Counter())
+        self.assertRaises(TypeError, Merge, 64, Counter())
+        self.assertRaises(TypeError, Merge, False, Counter())
+
+    def test_4_random_large_list(self):
+        randomList = []
+        for i in range(2 ** 10):
+            randomList.append(randint(0,1000))
+        
+        c = Counter()
+        pySort = sorted(randomList[::])
+        Merge(randomList, c)
+        self.assertEqual(randomList, pySort)
+
+    def test_5_dup_list(self):
+        randomList = [0] * 20
+        c = Counter()
+        Merge(randomList, c)
+        self.assertEqual(c.mS, 176)
+        self.assertEqual(c.mC, 88)
+        self.assertEqual(randomList, [0] * 20)
+
+    def test_6_returns_none(self):
+        ret = Merge([], Counter())
+        self.assertIsNone(ret)
+
 #=======================================================================================#
 #===================================== Quick Sort ======================================#
 #=======================================================================================#
@@ -138,6 +204,40 @@ class TestQuickSort(unittest.TestCase):
         self.assertEqual(c.mC, 23)
         self.assertEqual(c.mS, 13)
         self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
+
+    def test_2_empty_list(self):
+        c = Counter()
+        Quick([], c)
+        self.assertEqual(c.mC, 0)
+        self.assertEqual(c.mS, 0)
+        self.assertEqual([], [])
+
+    def test_3_non_list(self):
+        self.assertRaises(TypeError, Quick, "string", Counter())
+        self.assertRaises(TypeError, Quick, 64, Counter())
+        self.assertRaises(TypeError, Quick, False, Counter())
+
+    def test_4_random_large_list(self):
+        randomList = []
+        for i in range(2 ** 10):
+            randomList.append(randint(0,1000))
+        
+        c = Counter()
+        pySort = sorted(randomList[::])
+        Quick(randomList, c)
+        self.assertEqual(randomList, pySort)
+
+    def test_5_dup_list(self):
+        randomList = [0] * 20
+        c = Counter()
+        Quick(randomList, c)
+        self.assertEqual(c.mS, 19)
+        self.assertEqual(c.mC, 190)
+        self.assertEqual(randomList, [0] * 20)
+
+    def test_6_returns_none(self):
+        ret = Quick([], Counter())
+        self.assertIsNone(ret)
 
 #=======================================================================================#
 #===================================== mQuick Sort =====================================#
@@ -152,6 +252,40 @@ class TestmQuickSort(unittest.TestCase):
         self.assertEqual(c.mS, 17)
         self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
 
+    def test_2_empty_list(self):
+        c = Counter()
+        mQuick([], c)
+        self.assertEqual(c.mC, 0)
+        self.assertEqual(c.mS, 0)
+        self.assertEqual([], [])
+
+    def test_3_non_list(self):
+        self.assertRaises(TypeError, mQuick, "string", Counter())
+        self.assertRaises(TypeError, mQuick, 64, Counter())
+        self.assertRaises(TypeError, mQuick, False, Counter())
+
+    def test_4_random_large_list(self):
+        randomList = []
+        for i in range(2 ** 10):
+            randomList.append(randint(0,1000))
+        
+        c = Counter()
+        pySort = sorted(randomList[::])
+        mQuick(randomList, c)
+        self.assertEqual(randomList, pySort)
+
+    def test_5_dup_list(self):
+        randomList = [0] * 20
+        c = Counter()
+        mQuick(randomList, c)
+        self.assertEqual(c.mS, 38)
+        self.assertEqual(c.mC, 190)
+        self.assertEqual(randomList, [0] * 20)
+
+    def test_6_returns_none(self):
+        ret = mQuick([], Counter())
+        self.assertIsNone(ret)
+
 #=======================================================================================#
 #===================================== Count Sort ======================================#
 #=======================================================================================#
@@ -164,6 +298,40 @@ class TestCountSort(unittest.TestCase):
         self.assertEqual(c.mC, 10)
         self.assertEqual(c.mS, 10)
         self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
+
+    def test_2_empty_list(self):
+        c = Counter()
+        Count([], c)
+        self.assertEqual(c.mC, 0)
+        self.assertEqual(c.mS, 0)
+        self.assertEqual([], [])
+
+    def test_3_non_list(self):
+        self.assertRaises(TypeError, Count, "string", Counter())
+        self.assertRaises(TypeError, Count, 64, Counter())
+        self.assertRaises(TypeError, Count, False, Counter())
+
+    def test_4_random_large_list(self):
+        randomList = []
+        for i in range(2 ** 10):
+            randomList.append(randint(0,1000))
+        
+        c = Counter()
+        pySort = sorted(randomList[::])
+        Count(randomList, c)
+        self.assertEqual(randomList, pySort)
+
+    def test_5_dup_list(self):
+        randomList = [0] * 20
+        c = Counter()
+        Count(randomList, c)
+        self.assertEqual(c.mS, 20)
+        self.assertEqual(c.mC, 20)
+        self.assertEqual(randomList, [0] * 20)
+
+    def test_6_returns_none(self):
+        ret = Count([], Counter())
+        self.assertIsNone(ret)
 
 if __name__ == '__main__':
     unittest.main()
