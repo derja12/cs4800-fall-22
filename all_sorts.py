@@ -99,7 +99,7 @@ def Merge(A,c):
             A.append(L[0])
             L.remove(L[0])
             c.mS += 1
-        elif L[0] < R[0]:
+        elif L[0] > R[0]:
             A.append(L[0])
             L.remove(L[0])
             c.mS += 1

@@ -2,6 +2,7 @@
 import ast
 import astpretty
 # import traceAst
+from unit_tests import *
 import trace
 import sys
 
@@ -25,14 +26,17 @@ for line in fin:
 node = ast.parse(fileContent)
 fin.close()
 
-astpretty.pprint(node)
+# astpretty.pprint(node)
 # print(ast.dump(node))
 tracer = trace.Trace(
-    ignoredirs=[sys.prefix, sys.exec_prefix]
+    ignoredirs=[sys.prefix, sys.exec_prefix],
+    outfile="trace_output.txt",
+    trace=1,
+    timing=True
 )
-tracer.run(node)
+tracer.run("main()")
 
 r = tracer.results()
-r.write_results(show_missing=True, coverdir=".")
+r.write_results(show_missing=True, coverdir="./coverage")
 # traceAst
 
