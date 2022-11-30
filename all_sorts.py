@@ -166,7 +166,7 @@ def Count(A,c):
 def main1():
     sys.setrecursionlimit(5000)
     
-    c = Counts()
+    c = Counter()
     A = createRandomList(15)
     B = A[:]
     C = A[:]
@@ -241,7 +241,7 @@ def main2():
                     A[0],A[len(A)//2] = A[len(A)//2],A[0]
                 B = A[:]
                 A.sort()
-                c = Counts()
+                c = Counter()
                 sort(B,c)
                 if A != B:
                     print('Error!')

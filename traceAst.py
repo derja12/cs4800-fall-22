@@ -30,13 +30,11 @@ fin.close()
 # print(ast.dump(node))
 tracer = trace.Trace(
     ignoredirs=[sys.prefix, sys.exec_prefix],
-    outfile="trace_output.txt",
-    trace=1,
-    timing=True
+    trace=0,
+    count=1
 )
-tracer.run("main()")
-
+tracer.run("main('TestMergeSort.test_1_expected_use')")
 r = tracer.results()
-r.write_results(show_missing=True, coverdir="./coverage")
+r.write_results(show_missing=True, coverdir=".")
 # traceAst
 
