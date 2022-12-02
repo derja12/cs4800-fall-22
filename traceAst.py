@@ -33,7 +33,7 @@ tracer = trace.Trace(
     trace=0,
     count=1
 )
-tracer.run("main('TestMergeSort.test_1_expected_use')")
+tracer.run("main_testing('TestMergeSort.test_1_expected_use')")
 r = tracer.results()
 r.write_results(show_missing=True, coverdir=".")
 # traceAst

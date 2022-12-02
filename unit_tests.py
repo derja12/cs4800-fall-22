@@ -7,6 +7,8 @@ from all_sorts import Bubble, Shaker, Select, Merge, Quick, mQuick, Count, Count
 #===================================== Bubble Sort =====================================#
 #=======================================================================================#
 
+FAILS_FILE = ""
+
 class TestBubbleSort(unittest.TestCase):
     test_name = 'Bubble Sort'
 
@@ -173,9 +175,12 @@ class TestMergeSort(unittest.TestCase):
         randomList = [1,5,7,2,0,1,6,2,7,9]
         c = Counter()
         Merge(randomList, c)
-        self.assertEqual(c.mC, 34)
-        self.assertEqual(c.mS, 68)
-        self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
+        try:
+            self.assertEqual(c.mC, 34)
+            self.assertEqual(c.mS, 68)
+            self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
+        except Exception:
+            log_failure(self.test_name, 1)
 
     def test_2_empty_list(self):
         c = Counter()
@@ -364,13 +369,15 @@ class TestCountSort(unittest.TestCase):
         ret = Count([], Counter())
         self.assertIsNone(ret)
 
-def main(defaultTest=None):
+def main_testing(defaultTest=None, defaultFailureFile="temp_default/failures.txt"):
+    global FAILS_FILE
+    FAILS_FILE = defaultFailureFile
     unittest.main(defaultTest=defaultTest, exit=False)
     
 def log_failure(test_class, test_number):
-    fout = open("failures.txt", "a")
+    fout = open(FAILS_FILE, "a")
     fout.write("{:<15} | {:<10}\n".format(test_class, test_number))
     fout.close()
 
 if __name__ == '__main__':
-    main()
+    main_testing()
