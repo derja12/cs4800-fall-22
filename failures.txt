@@ -1,1 +1,2 @@
 Merge Sort      | 1         
+Merge Sort      | 1         

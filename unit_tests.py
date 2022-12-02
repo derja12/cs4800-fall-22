@@ -173,12 +173,9 @@ class TestMergeSort(unittest.TestCase):
         randomList = [1,5,7,2,0,1,6,2,7,9]
         c = Counter()
         Merge(randomList, c)
-        try:
-            self.assertEqual(c.mC, 34)
-            self.assertEqual(c.mS, 68)
-            self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
-        except Exception:
-            log_failure(self.test_name, 1)
+        self.assertEqual(c.mC, 34)
+        self.assertEqual(c.mS, 68)
+        self.assertEqual(randomList, [0,1,1,2,2,5,6,7,7,9])
 
     def test_2_empty_list(self):
         c = Counter()
