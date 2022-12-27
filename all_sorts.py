@@ -20,7 +20,7 @@ def Bubble(L,c):
                 c.mS += 1
                 L[i],L[i+1] = L[i+1],L[i]
                 indicator = True
-    return
+    return True
 
 def Shaker(L,c):
     if type(L) != list:

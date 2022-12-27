@@ -1,9 +1,13 @@
 #does not work with python 2 so make sure on that one
 import ast
+import marshal
+import pickle
 import astpretty
 # import traceAst
 import trace
 import sys
+import astor
+import parse
 
 def test():
     var = 10 + 10
@@ -18,21 +22,30 @@ def test():
 # print(ast.parse(open("all_sorts.py")))
 
 
-fin = open("all_sorts.py", "r")
-fileContent = ""
-for line in fin:
-    fileContent += line
-node = ast.parse(fileContent)
-fin.close()
+node = parse.fileToAst("all_sorts.py")
+# print(astpretty.pprint(node))
 
-astpretty.pprint(node)
+parse.astToFile(node, "output2.py")
+
+# astpretty.pprint(node)
 # print(ast.dump(node))
 tracer = trace.Trace(
     ignoredirs=[sys.prefix, sys.exec_prefix]
 )
-tracer.run(node)
 
-r = tracer.results()
-r.write_results(show_missing=True, coverdir=".")
+fileOutput = astor.to_source(node=node)
+
+
+
+# trying to get writing to a file to work
+file = open("output.py", "w") 
+file.write(fileOutput)
+# # marshal.dump(fileOutput.__str__, file)
+file.close()
+
+# tracing execution
+# tracer.run(node)
+# r = tracer.results()
+# r.write_results(show_missing=True, coverdir=".")
 # traceAst
 
